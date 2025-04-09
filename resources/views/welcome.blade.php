@@ -5,9 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
+        @livewireStyles
     </head>
     <body>
+        <livewire:hello-world />
 
+        <livewire:counter />
+
+        <livewire:todo />
+
+        @livewireScripts
     </body>
 </html>
