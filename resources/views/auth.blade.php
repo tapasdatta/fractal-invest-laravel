@@ -41,30 +41,13 @@
                         </svg>
                      </a>
                   </div>
-                  <h1 class="mt-8 text-base/6 font-medium">Welcome back!</h1>
+                  <h1 class="mt-8 text-base/6 font-medium">Let’s get started with your email!</h1>
                   <p class="mt-1 text-sm/5 text-gray-600">
-                     Sign in to your account to continue.
+                      Enter your email — we’ll send you a code to log in.
                   </p>
-                  <div class="mt-8 space-y-3">
+                  <div class="mt-4 space-y-3">
                      <label class="text-sm/5 font-medium">Email</label>
                      <input required autoFocus type="email" name="email" class="block w-full rounded-lg border border-transparent shadow-sm ring-1 ring-black/10 px-[calc(--spacing(2)-1px)] py-[calc(--spacing(1.5)-1px)] text-base/6 sm:text-sm/6 data-focus:outline data-focus:outline-2 data-focus:-outline-offset-1 data-focus:outline-black"/>
-                  </div>
-                  <div class="mt-8 space-y-3">
-                     <label class="text-sm/5 font-medium">Password</label>
-                     <input required type="password" name="password" class="block w-full rounded-lg border border-transparent shadow-sm ring-1 ring-black/10 px-[calc(--spacing(2)-1px)] py-[calc(--spacing(1.5)-1px)] text-base/6 sm:text-sm/6 data-focus:outline data-focus:outline-2 data-focus:-outline-offset-1 data-focus:outline-black"/>
-                  </div>
-                  <div class="mt-8 flex items-center justify-between text-sm/5">
-                     <div class="flex items-center gap-3">
-                        <span name="remember-me" class="group block size-4 rounded-sm border border-transparent shadow-sm ring-1 ring-black/10 focus:outline-hidden data-checked:bg-black data-checked:ring-black data-focus:outline data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-black">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" class="fill-white opacity-0 group-data-checked:opacity-100">
-                              <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                           </svg>
-                        </span>
-                        <label>Remember me</label>
-                     </div>
-                     <a href="#" class="font-medium hover:text-gray-600">
-                     Forgot password?
-                     </a>
                   </div>
                   <div class="mt-8">
                      <button class="w-full inline-flex items-center justify-center px-4 py-[calc(--spacing(2)-1px)] rounded-full border border-transparent bg-gray-950 shadow-md text-base font-medium whitespace-nowrap text-white data-disabled:bg-gray-950 data-disabled:opacity-40 data-hover:bg-gray-800" type="submit" class="w-full">
@@ -72,12 +55,6 @@
                      </button>
                   </div>
                </form>
-               <div class="m-1.5 rounded-lg bg-gray-50 py-4 text-center text-sm/5 ring-1 ring-black/5">
-                  Not a member?
-                  <a href="#" class="font-medium hover:text-gray-600">
-                  Create an account
-                  </a>
-               </div>
             </div>
          </div>
       </main>
