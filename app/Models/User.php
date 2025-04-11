@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\OtpCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -18,9 +21,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'email', 'otp', 'otp_expired_at'
     ];
 
     /**
@@ -29,7 +30,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
+        'otp',
+        'otp_expired_at',
+        'otp_verified_at',
         'remember_token',
     ];
 
@@ -41,8 +44,64 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'otp_expired_at' => 'datetime',
+            'otp_verified_at' => 'datetime',
+            'otp' => 'hashed',
         ];
+    }
+
+    /**
+    * Retrieve user by email and OTP.
+    *
+    * @param string $email
+    * @param string $otp
+    * @return int|null
+    */
+    protected static function getUserByEmailOtp(string $email, string $otp)
+    {
+        $user = self::where('email', $email)->first();
+
+        if ($user && Hash::check($otp, $user->otp) && $user->otp_expired_at >= now()) {
+            $user->clearOtp();
+
+            return $user->id;
+        }
+
+        return null;
+    }
+
+    /**
+    * Clear OTP and update verification time.
+    *
+    * @return void
+    */
+    public function clearOtp() :void
+    {
+        $this->update([
+            'otp' => null,
+            'otp_expired_at' => null,
+            'otp_verified_at' => now()
+        ]);
+    }
+
+    /**
+    * Generate and send OTP to the user.
+    *
+    * @param string $email
+    * @return void
+    */
+    public static function generateOtp(string $email) :void
+    {
+        $otp = random_int(100000, 999999);
+
+        $user = User::updateOrCreate(
+            ['email' => $email],
+            [
+                'otp' => $otp,
+                'otp_expired_at' => now()->addMinutes(5)
+            ]
+        );
+
+        $user->notify(new OtpCreated($user, $otp));
     }
 }

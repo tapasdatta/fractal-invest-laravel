@@ -1,11 +1,35 @@
 <?php
 
+use App\Livewire\Auth;
+use App\Livewire\Otp;
+use App\Models\User;
+use App\Notifications\OtpCreated;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth as AuthFacade;
 
-Route::get("/", function () {
-    return view("welcome");
+Route::group(['middleware' => 'guest'], function() {
+    Route::get("auth", Auth::class)->name('auth');
 });
 
-Route::get("/auth", function () {
-    return view("auth");
+Route::group(['middleware' => 'auth'], function() {
+    Route::get("/", function () {
+        return view("welcome");
+    })->name('dashboard');
+});
+
+Route::get('users', function () {
+    return User::all();
+});
+
+Route::get('/notification', function () {
+    $user = User::find(1);
+    $otp = "343436";
+
+    return (new OtpCreated($user, $otp))
+        ->toMail($user);
+});
+
+Route::get('/logout', function () {
+    AuthFacade::logout();
+    return redirect()->route('auth');
 });
