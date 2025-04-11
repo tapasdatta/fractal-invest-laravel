@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\User;
-use App\Notifications\OtpCreated;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth as AuthFacade;
 
