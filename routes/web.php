@@ -7,7 +7,7 @@ use App\Notifications\OtpCreated;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth as AuthFacade;
 
-Route::group(['middleware' => 'guest'], function() {
+Route::middleware(['guest', 'throttle:5,1'])->group(function() {
     Route::get("auth", Auth::class)->name('auth');
 });
 

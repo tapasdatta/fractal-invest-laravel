@@ -30,6 +30,9 @@
             <p class="mt-1 text-sm/5 text-gray-600">
                 Enter your email — we’ll send you a code to log in.
             </p>
+            @error('login')
+                <p class="mt-2 text-sm text-red-600 text-center" id="email-error">{{ $message }}</p>
+            @enderror
             <div class="mt-4 space-y-3">
                 <label class="text-sm/5 font-medium">Email</label>
                 <input
@@ -44,7 +47,7 @@
                     required type="email" name="email"/>
             </div>
             @error('email')
-                <p class="mt-2 text-sm text-red-600" id="email-error">Not a valid email address.</p>
+                <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
             @enderror
             <div class="mt-8">
                 <button
@@ -66,6 +69,9 @@
             <p class="mt-1 text-sm/5 text-gray-600">
                 You have sent an email with a code to log in.
             </p>
+            @error('otp')
+                <p class="mt-2 text-sm text-red-600 text-center" id="email-error">{{ $message }}</p>
+            @enderror
             <div class="mt-4 space-y-3">
                 <label class="text-sm/5 font-medium">OTP</label>
                 <input

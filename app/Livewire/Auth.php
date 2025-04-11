@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth as AuthFacade;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 
 class Auth extends Component
 {
@@ -29,6 +31,8 @@ class Auth extends Component
     */
     public function login()
     {
+        $this->rateLimit('login');
+
         $this->validate([
             'email' => 'required|email'
         ]);
@@ -45,6 +49,8 @@ class Auth extends Component
      */
     public function verify_otp()
     {
+        $this->rateLimit('verify_otp');
+
         $this->validate([
             'otp' => ['required', 'numeric', 'digits:6'],
         ]);
@@ -58,5 +64,18 @@ class Auth extends Component
         AuthFacade::loginUsingId($user, remember: true);
 
         $this->redirect(route('dashboard'), navigate: true);
+    }
+
+    protected function rateLimit(string $action)
+    {
+        $key = $action . '.' . request()->ip();
+
+        if (RateLimiter::tooManyAttempts($key, $perMinute = 5)) {
+            throw ValidationException::withMessages([
+                $action => "Too many attempts."
+            ]);
+        }
+
+        RateLimiter::increment($key);
     }
 }
