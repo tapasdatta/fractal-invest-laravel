@@ -7,6 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth as AuthFacade;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 
 class Auth extends Component
@@ -22,6 +23,7 @@ class Auth extends Component
     */
 
     #[Title("Get started")]
+    #[Layout('components.layouts.auth')]
     public function render()
     {
         return view('livewire.auth');

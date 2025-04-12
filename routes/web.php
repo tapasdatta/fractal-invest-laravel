@@ -13,8 +13,9 @@ Route::middleware(['guest', 'throttle:50,1'])->group(function() {
 });
 
 Route::group(['middleware' => 'auth'], function() {
+
     Route::get("/", function () {
-        return view("welcome");
+        return "hello";
     })->name('dashboard');
 
     Route::get('logout', function () {
@@ -22,11 +23,6 @@ Route::group(['middleware' => 'auth'], function() {
         return redirect()->route('auth');
     });
 });
-
-Route::get('users', function () {
-    return User::all();
-});
-
 
 
 //Email OTP Preview
