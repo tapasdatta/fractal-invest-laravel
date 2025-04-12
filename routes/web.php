@@ -11,6 +11,8 @@ Route::middleware(['guest', 'throttle:5,1'])->group(function() {
     Route::get("auth", Auth::class)->name('auth');
 });
 
+// https://aregsar.com/blog/2020/laravel-app-with-redis-in-docker/
+
 Route::group(['middleware' => 'auth'], function() {
     Route::get("/", function () {
         return view("welcome");
