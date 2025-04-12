@@ -30,10 +30,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'otp',
-        'otp_expired_at',
-        'otp_verified_at',
-        'remember_token',
+        // 'otp',
+        // 'otp_expired_at',
+        // 'otp_verified_at',
+        // 'remember_token',
     ];
 
     /**
@@ -62,9 +62,10 @@ class User extends Authenticatable
         $user = self::where('email', $email)->first();
 
         if ($user && Hash::check($otp, $user->otp) && $user->otp_expired_at >= now()) {
-            $user->clearOtp();
 
-            return $user->id;
+            $user->verifyOtp();
+
+            return $user;
         }
 
         return null;
@@ -75,7 +76,7 @@ class User extends Authenticatable
     *
     * @return void
     */
-    public function clearOtp() :void
+    public function verifyOtp() :void
     {
         $this->update([
             'otp' => null,
@@ -88,9 +89,9 @@ class User extends Authenticatable
     * Generate and send OTP to the user.
     *
     * @param string $email
-    * @return void
+    * @return int
     */
-    public static function generateOtp(string $email) :void
+    public static function generateOtp(string $email)
     {
         $otp = random_int(100000, 999999);
 
@@ -103,5 +104,7 @@ class User extends Authenticatable
         );
 
         $user->notify(new OtpCreated($user, $otp));
+
+        return $otp;
     }
 }

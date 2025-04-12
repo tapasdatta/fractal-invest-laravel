@@ -7,6 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth as AuthFacade;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Title;
 
 class Auth extends Component
 {
@@ -19,6 +20,8 @@ class Auth extends Component
     *
     * @return \Illuminate\View\View
     */
+
+    #[Title("Get started")]
     public function render()
     {
         return view('livewire.auth');
@@ -37,7 +40,12 @@ class Auth extends Component
             'email' => 'required|email'
         ]);
 
-        User::generateOtp($this->email);
+        $otp = User::generateOtp($this->email);
+
+        if(env('APP_ENV') == 'local')
+        {
+            $this->otp = $otp;
+        }
 
         $this->login_form = false;
     }
@@ -61,7 +69,7 @@ class Auth extends Component
             return $this->addError('otp', 'Invalid OTP');
         }
 
-        AuthFacade::loginUsingId($user, remember: true);
+        AuthFacade::loginUsingId($user->id, remember: true);
 
         $this->redirect(route('dashboard'), navigate: true);
     }
