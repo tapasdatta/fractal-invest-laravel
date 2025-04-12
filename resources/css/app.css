@@ -7,7 +7,7 @@
 @source '../**/*.js';
 
 @theme {
-  --font-sans: Switzer, system-ui, sans-serif;
+  --font-sans: Inter, sans-serif;
 
   --radius-4xl: 2rem;
 }
