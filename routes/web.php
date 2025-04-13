@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Auth;
+use App\Livewire\Dashboard;
 use App\Livewire\Otp;
 use App\Models\User;
 use App\Notifications\OtpCreated;
@@ -12,16 +13,9 @@ Route::middleware(['guest', 'throttle:50,1'])->group(function() {
     Route::get("auth", Auth::class)->name('auth');
 });
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
 
-    Route::get("/", function () {
-        return "hello";
-    })->name('dashboard');
-
-    Route::get('logout', function () {
-        AuthFacade::logout();
-        return redirect()->route('auth');
-    });
+    Route::get("/", Dashboard::class)->name('dashboard');
 });
 
 

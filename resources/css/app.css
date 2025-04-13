@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @source "../views";
+/* @import "@headlessui/tailwindcss"; */
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -7,7 +8,7 @@
 @source '../**/*.js';
 
 @theme {
-  --font-sans: Switzer, system-ui, sans-serif;
+  --font-sans: Inter, sans-serif;
 
   --radius-4xl: 2rem;
 }
