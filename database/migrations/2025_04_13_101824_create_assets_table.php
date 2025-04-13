@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title', 255);
             $table->text('description')->nullable();
-            $table->decimal('intial_value', 15, 2);
+            $table->enum('currency', ['usd'])->default('usd');
+            $table->decimal('initial_value', 15, 2);
             $table->decimal('current_value', 15, 2)->default(0.00);
             $table->decimal('target_funding', 15, 2);
             $table->decimal('current_funding', 15, 2)->default(0.00);
