@@ -13,7 +13,7 @@ Route::middleware(['guest', 'throttle:50,1'])->group(function() {
     Route::get("auth", Auth::class)->name('auth');
 });
 
-Route::group([], function() {
+Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
 
     Route::get("/", Dashboard::class)->name('dashboard');
 
