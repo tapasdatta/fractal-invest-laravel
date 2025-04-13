@@ -16,11 +16,6 @@ Route::middleware(['guest', 'throttle:50,1'])->group(function() {
 Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
 
     Route::get("/", Dashboard::class)->name('dashboard');
-
-    Route::get('logout', function () {
-        AuthFacade::logout();
-        return redirect()->route('auth');
-    });
 });
 
 
