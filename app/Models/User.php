@@ -30,10 +30,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        // 'otp',
-        // 'otp_expired_at',
-        // 'otp_verified_at',
-        // 'remember_token',
+        'otp',
+        'otp_expired_at',
+        'otp_verified_at',
+        'remember_token',
     ];
 
     /**
@@ -106,5 +106,15 @@ class User extends Authenticatable
         $user->notify(new OtpCreated($user, $otp));
 
         return $otp;
+    }
+
+    /**
+     * Get user's assets.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function assets()
+    {
+        return $this->hasMany(Asset::class);
     }
 }
