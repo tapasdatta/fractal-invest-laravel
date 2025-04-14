@@ -40,7 +40,7 @@
                                 clip-rule="evenodd"
                             ></path>
                         </svg>
-                        <span class="truncate">Home</span>
+                        <span class="truncate">Assets</span>
                     </a>
                 </span>
                 <span class="relative">

@@ -2,6 +2,7 @@
 
 use App\Livewire\Auth;
 use App\Livewire\Assets\CreateAsset;
+use App\Livewire\Assets\ListAssets;
 use App\Livewire\Dashboard;
 use App\Models\Asset;
 use App\Models\User;
@@ -16,6 +17,7 @@ Route::middleware(['guest', 'throttle:50,1'])->group(function() {
 Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
     Route::get("/", Dashboard::class)->name('dashboard');
     Route::get("/assets/create", CreateAsset::class)->name('assets.create');
+    Route::get("/assets", ListAssets::class)->name('assets.list');
 });
 
 
@@ -33,6 +35,6 @@ Route::get('browseremail/{email}/{otp}', function ($email, $otp) {
 })->name('browseremail');
 
 
-Route::get('assets', function() {
-    return Asset::all();
-});
+// Route::get('assets', function() {
+//     return Asset::all();
+// });
