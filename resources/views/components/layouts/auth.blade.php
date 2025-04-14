@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="antialiased dark text-zinc-950 lg:bg-zinc-100 dark:bg-zinc-900 dark:text-white dark:lg:bg-zinc-950">
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,16 +8,12 @@
       @livewireStyles
       @vite(['resources/css/app.css', 'resources/js/app.js'])
    </head>
-   <body class="text-gray-950 antialiased">
-      <main class="overflow-hidden bg-gray-50">
-         <div class="relative mx-auto max-w-7xl">
-           <div class="absolute -top-44 -right-60 h-60 w-[36rem] transform-gpu md:right-0 bg-linear-115 from-[#fff1be] from-28% via-[#ee87cb] via-70% to-[#b060ff] rotate-[-10deg] rounded-full blur-3xl"/>
-           </div>
-         </div>
-         <div class="isolate flex min-h-dvh items-center justify-center p-6 lg:p-8">
-            <div class="w-full max-w-md rounded-xl bg-white shadow-md ring-1 ring-black/5">
-                {{ $slot }}
-            </div>
+   <body>
+      <main class="flex min-h-dvh flex-col p-2">
+         <div class="flex grow items-center justify-center p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
+
+            {{ $slot }}
+
          </div>
       </main>
       @livewireScripts

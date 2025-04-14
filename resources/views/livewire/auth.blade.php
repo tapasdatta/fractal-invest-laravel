@@ -1,66 +1,53 @@
 <div>
     @if($login_form)
-        <form class="p-7 sm:p-11" wire:submit="login">
+        <form class="grid w-full max-w-sm grid-cols-1 gap-3.5" wire:submit="login">
             <div class="flex items-start">
-                <a href="/" title="Home">
-                    <svg viewBox="0 0 34 34" fill="none" class="h-9 fill-black">
-                        <path d="M19.598 18.5C18.7696 19.9349 16.9348 20.4265 15.4999 19.5981C14.065 18.7696 13.5734 16.9349 14.4018 15.5C15.2303 14.0651 17.065 13.5735 18.4999 14.4019C19.9348 15.2303 20.4264 17.0651 19.598 18.5Z" />
-                        <path d="M23.232 10.2058C22.6797 11.1623 21.4565 11.4901 20.4999 10.9378C19.5433 10.3855 19.2156 9.16235 19.7679 8.20576C20.3201 7.24918 21.5433 6.92143 22.4999 7.47371C23.4565 8.026 23.7842 9.24918 23.232 10.2058Z" />
-                        <path d="M19.7679 25.7944C19.2156 24.8378 19.5433 23.6146 20.4999 23.0623C21.4565 22.51 22.6797 22.8378 23.232 23.7944C23.7843 24.7509 23.4565 25.9741 22.4999 26.5264C21.5433 27.0787 20.3202 26.7509 19.7679 25.7944Z" />
-                        <path d="M25.9999 19.0001C24.8953 19.0001 23.9999 18.1047 23.9999 17.0001C23.9999 15.8956 24.8953 15.0001 25.9999 15.0001C27.1045 15.0001 27.9999 15.8956 27.9999 17.0001C27.9999 18.1047 27.1045 19.0001 25.9999 19.0001Z" />
-                        <path d="M14.232 25.7942C13.6797 26.7508 12.4565 27.0786 11.4999 26.5263C10.5433 25.974 10.2156 24.7508 10.7679 23.7942C11.3201 22.8376 12.5433 22.5099 13.4999 23.0622C14.4565 23.6145 14.7842 24.8376 14.232 25.7942Z" />
-                        <path d="M10.7679 10.2059C10.2157 9.24936 10.5434 8.02618 11.5 7.4739C12.4566 6.92161 13.6798 7.24936 14.232 8.20595C14.7843 9.16253 14.4566 10.3857 13.5 10.938C12.5434 11.4903 11.3202 11.1625 10.7679 10.2059Z" />
-                        <path d="M7.99999 19.0002C6.89542 19.0002 5.99999 18.1047 5.99999 17.0002C5.99999 15.8956 6.89542 15.0002 7.99999 15.0002C9.10456 15.0002 9.99999 15.8956 9.99999 17.0002C9.99999 18.1047 9.10456 19.0002 7.99999 19.0002Z" />
-                        <path d="M25.8659 3.64359C25.5898 4.12188 24.9782 4.28575 24.4999 4.00961C24.0216 3.73347 23.8577 3.12188 24.1339 2.64359C24.41 2.16529 25.0216 2.00142 25.4999 2.27756C25.9782 2.5537 26.1421 3.16529 25.8659 3.64359Z" />
-                        <path d="M33.0001 18.0002C32.4478 18.0002 32.0001 17.5524 32.0001 17.0002C32.0001 16.4479 32.4478 16.0002 33.0001 16.0002C33.5523 16.0002 34.0001 16.4479 34.0001 17.0002C34.0001 17.5524 33.5523 18.0002 33.0001 18.0002Z" />
-                        <path d="M31.3561 9.86594C30.8778 10.1421 30.2663 9.97821 29.9901 9.49992C29.714 9.02162 29.8778 8.41003 30.3561 8.13389C30.8344 7.85775 31.446 8.02162 31.7222 8.49992C31.9983 8.97821 31.8344 9.5898 31.3561 9.86594Z" />
-                        <path d="M30.3563 25.866C29.878 25.5899 29.7141 24.9783 29.9903 24.5C30.2664 24.0217 30.878 23.8578 31.3563 24.134C31.8346 24.4101 31.9985 25.0217 31.7223 25.5C31.4462 25.9783 30.8346 26.1422 30.3563 25.866Z" />
-                        <path d="M16.0001 33.0001C16.0001 32.4478 16.4478 32.0001 17.0001 32.0001C17.5524 32.0001 18.0001 32.4478 18.0001 33.0001C18.0001 33.5524 17.5524 34.0001 17.0001 34.0001C16.4478 34.0001 16.0001 33.5524 16.0001 33.0001Z" />
-                        <path d="M24.134 31.3566C23.8579 30.8783 24.0218 30.2667 24.5001 29.9905C24.9784 29.7144 25.59 29.8783 25.8661 30.3566C26.1422 30.8349 25.9784 31.4464 25.5001 31.7226C25.0218 31.9987 24.4102 31.8349 24.134 31.3566Z" />
-                        <path d="M9.86593 31.3564C9.58978 31.8347 8.97819 31.9986 8.4999 31.7224C8.02161 31.4463 7.85773 30.8347 8.13388 30.3564C8.41002 29.8781 9.02161 29.7142 9.4999 29.9904C9.97819 30.2665 10.1421 30.8781 9.86593 31.3564Z" />
-                        <path d="M1 18.0001C0.447715 18.0001 -3.44684e-08 17.5524 0 17.0001C3.44684e-08 16.4478 0.447715 16.0001 1 16.0001C1.55228 16.0001 2 16.4478 2 17.0001C2 17.5524 1.55228 18.0001 1 18.0001Z" />
-                        <path d="M3.64329 25.866C3.16499 26.1422 2.5534 25.9783 2.27726 25.5C2.00112 25.0217 2.16499 24.4101 2.64329 24.134C3.12158 23.8578 3.73317 24.0217 4.00931 24.5C4.28545 24.9783 4.12158 25.5899 3.64329 25.866Z" />
-                        <path d="M2.6435 9.86602C2.1652 9.58987 2.00133 8.97828 2.27747 8.49999C2.55361 8.0217 3.1652 7.85782 3.6435 8.13397C4.12179 8.41011 4.28566 9.0217 4.00952 9.49999C3.73338 9.97828 3.12179 10.1422 2.6435 9.86602Z" />
-                        <path d="M16.0001 1C16.0001 0.447715 16.4478 -4.87226e-08 17.0001 0C17.5524 4.87226e-08 18.0001 0.447715 18.0001 1C18.0001 1.55228 17.5524 2 17.0001 2C16.4478 2 16.0001 1.55228 16.0001 1Z" />
-                        <path d="M8.13398 3.64371C7.85783 3.16542 8.02171 2.55383 8.5 2.27768C8.97829 2.00154 9.58988 2.16542 9.86603 2.64371C10.1422 3.122 9.97829 3.73359 9.5 4.00973C9.02171 4.28588 8.41012 4.122 8.13398 3.64371Z" />
-                    </svg>
-                </a>
+                <svg fill="currentColor" viewBox="0 0 113 22" class="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.99906 0.5L6.57031 0.742752L0.570312 10.7428V11.2572L6.57031 21.2572L6.99906 21.5H18.9991L19.3526 20.6464L16.8526 18.1464L16.4991 18H9.27424L4.8409 11L9.27424 4H16.4991L16.8526 3.85355L19.3526 1.35355L18.9991 0.5H6.99906Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M20.7927 4.21875L18.3657 6.64575L18.2969 7.2668L20.6605 10.9993L18.2969 14.7318L18.3657 15.3529L20.7927 17.7799L21.5751 17.6835L25.4311 11.2565V10.7421L21.5751 4.31507L20.7927 4.21875Z"></path></svg>
             </div>
-            <h1 class="mt-8 text-base/6 font-medium">Let’s get started with your email!</h1>
-            <p class="mt-1 text-sm/5 text-gray-600">
+            <h1 class="text-2xl/8 mt-3 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Sign in to your account</h1>            <p class="mt-1 text-sm/5 text-gray-600">
                 Enter your email — we’ll send you a code to log in.
             </p>
             @error('login')
                 <p class="mt-2 text-sm text-red-600 text-center" id="email-error">{{ $message }}</p>
             @enderror
             <div class="mt-4 space-y-3">
-                <label class="text-sm/5 font-medium">Email</label>
-                <input
-                    wire:model="email"
-                    wire:loading.attr="disabled"
-                    class="
-                        @error('email') outline-red-300 @enderror block w-full rounded-lg border
-                        border-gray-50 shadow-sm ring-1 ring-black/10 mt-1 sm:text-sm/6
-                        px-[calc(--spacing(2)-1px)] py-[calc(--spacing(1.5)-1px)] text-base/6
-                        disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500
-                        dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
-                    required type="email" name="email"/>
+                <label class="text-sm/5 font-medium ">Email</label>
+                <span
+                    data-slot="control"
+                    class="relative block w-full mt-4 before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500 has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none has-data-invalid:before:shadow-red-500/10"
+                >
+                    <input
+                        invalid="email"
+                        wire:model="email"
+                        wire:loading.attr="disabled"
+                        aria-label="Email"
+                        class="@error('email') outline-red-300 @enderror block w-full rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-2.5 text-base text-zinc-950 placeholder:text-zinc-500 sm:text-sm dark:text-white border border-zinc-950/10 dark:border-white/10 bg-transparent dark:bg-white/5 focus:outline-none data-invalid:border-red-500 data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/[2.5%]"
+                        placeholder="youremail@example.com"
+                        name="email"
+                        required
+                        autofocus
+                    />
+                </span>
+                @error('email')
+                    <p class="position: absolute mt-1 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500">{{ $message }}</p>
+                @enderror
             </div>
-            @error('email')
-                <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
-            @enderror
             <div class="mt-8">
                 <button
-                    wire:target="login"
+                    wire:target="save"
                     wire:loading.attr="disabled"
-                    class="
-                        w-full inline-flex items-center justify-center px-4 py-[calc(--spacing(2)-1px)]
-                        rounded-full border border-transparent bg-gray-950 shadow-md text-base font-medium
-                        transition duration-150 ease-in-out
-                        whitespace-nowrap text-white hover:bg-gray-800 cursor-pointer disabled:bg-gray-600 disabled:cursor-not-allowed"
-                    type="submit">
-                        <svg wire:loading class="mr-3 -ml-1 size-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                        Sign in
+                    type="submit"
+                    class="relative w-full inline-flex items-center justify-center gap-x-2 rounded-lg border text-base font-semibold px-8 py-2 sm:px-8 sm:py-1.5 sm:text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 border-transparent bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-600 dark:text-white dark:hover:bg-zinc-500"
+                >
+                    <span class="relative">
+                        <span wire:loading class="absolute inset-0 flex items-center left-0 -ml-6" aria-hidden="true">
+                            <svg class="w-4 h-4 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </span>
+                        Go ahead
+                    </span>
                 </button>
             </div>
         </form>
@@ -69,40 +56,48 @@
             <p class="mt-1 text-sm/5 text-gray-600">
                 You have sent an email with a code to log in.
             </p>
-            @error('otp')
-                <p class="mt-2 text-sm text-red-600 text-center" id="email-error">{{ $message }}</p>
-            @enderror
             <div class="mt-4 space-y-3">
-                <label class="text-sm/5 font-medium">OTP</label>
-                <input
-                    wire:model="otp"
-                    wire:loading.attr="disabled"
-                    class="
-                        @error('otp') outline-red-300 @enderror block w-full rounded-lg border
-                        border-gray-50 shadow-sm ring-1 ring-black/10 mt-1 sm:text-sm/6
-                        px-[calc(--spacing(2)-1px)] py-[calc(--spacing(1.5)-1px)] text-base/6
-                        disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500
-                        dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
-                    required autofocus type="otp" name="otp"/>
+                <label class="text-sm/5 font-medium ">OTP</label>
+                <span
+                    data-slot="control"
+                    class="relative block w-full mt-4 before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500 has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none has-data-invalid:before:shadow-red-500/10"
+                >
+                    <input
+                        invalid="otp"
+                        wire:model="otp"
+                        wire:loading.attr="disabled"
+                        aria-label="OTP"
+                        class="@error('otp') outline-red-300 @enderror block w-full rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-2.5 text-base text-zinc-950 placeholder:text-zinc-500 sm:text-sm dark:text-white border border-zinc-950/10 dark:border-white/10 bg-transparent dark:bg-white/5 focus:outline-none data-invalid:border-red-500 data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/[2.5%]"
+                        placeholder="544211"
+                        name="otp"
+                        required
+                        autofocus
+                    />
+                </span>
+                @error('otp')
+                    <p class="position: absolute mt-1 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500">{{ $message }}</p>
+                @enderror
             </div>
-            @error('otp')
-                <p class="mt-2 text-sm text-red-600" id="otp-error">OTP did not match.</p>
-            @enderror
             <div class="mt-8">
                 <button
-                    wire:target="otp"
+                    wire:target="verify_otp"
                     wire:loading.attr="disabled"
-                    class="
-                        w-full inline-flex items-center justify-center px-4 py-[calc(--spacing(2)-1px)]
-                        rounded-full border border-transparent bg-gray-950 shadow-md text-base font-medium
-                        whitespace-nowrap text-white hover:bg-gray-800 cursor-pointer disabled:bg-gray-600"
-                    type="submit">
-                        <svg wire:loading class="mr-3 -ml-1 size-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    type="submit"
+                    class="relative w-full inline-flex items-center justify-center gap-x-2 rounded-lg border text-base font-semibold px-8 py-2 sm:px-8 sm:py-1.5 sm:text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 border-transparent bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-600 dark:text-white dark:hover:bg-zinc-500"
+                >
+                    <span class="relative">
+                        <span wire:loading class="absolute inset-0 flex items-center left-0 -ml-6" aria-hidden="true">
+                            <svg class="w-4 h-4 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </span>
                         Verify
+                    </span>
                 </button>
             </div>
             @env('local')
-                <p class="mt-4 text-sm">Email not configured yet? Open <a href="{{ route('browseremail', ['email' => $email, 'otp' => $otp]) }}" target="_blank" class="text-indigo-600 underline">browser email</a> for the OTP verification.</p>
+                <p class="mt-5 text-sm text-white">Email not configured yet? Open <a href="{{ route('browseremail', ['email' => $email, 'otp' => $otp]) }}" target="_blank" class="text-indigo-600 underline">browser email</a> for the OTP verification.</p>
             @endenv
         </form>
     @endif
