@@ -1,7 +1,9 @@
 <div class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
     <div class="mx-auto max-w-6xl">
         <form wire:submit="save" class="mx-auto max-w-4xl">
-            <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Create Asset</h1>
+            <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">
+                Create Asset
+            </h1>
             <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10" />
             <section class="grid gap-x-8 gap-y-6 sm:grid-cols-2">
                 <div class="space-y-1">
@@ -15,13 +17,12 @@
                     >
                         <input
                             invalid="title"
-                            wire:model="title"
+                            wire:model.blur="asset.title"
                             wire:loading.attr="disabled"
                             aria-label="Asset Title"
                             class="@error('title') outline-red-300 @enderror relative block w-full appearance-none rounded-lg px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-500 dark:data-invalid:data-hover:border-red-500 data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/[2.5%] dark:data-hover:data-disabled:border-white/15 dark:[color-scheme:dark]"
                             placeholder="eg. Treasure Jacket"
                             name="title"
-                            required
                         />
                         @error('title')
                             <p class="position: absolute mt-2 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500">{{ $message }}</p>
@@ -41,13 +42,12 @@
                         class="relative block w-full before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500 has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none"
                     >
                         <textarea
-                            wire:model="description"
+                            wire:model.blur="asset.description"
                             wire:loading.attr="disabled"
                             aria-label="Asset Description"
                             name="description"
                             class="@error('description') outline-red-300 @enderror relative block h-full w-full appearance-none rounded-lg px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-600 dark:data-invalid:data-hover:border-red-600 disabled:border-zinc-950/20 dark:disabled:border-white/15 dark:disabled:bg-white/[2.5%] dark:data-hover:disabled:border-white/15 resize-y"
                             autocomplete="off"
-                            required
                         ></textarea>
                         @error('description')
                             <p class="position: absolute mt-2 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500">{{ $message }}</p>
@@ -67,16 +67,15 @@
                         class="relative block w-full before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500 has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none has-data-invalid:before:shadow-red-500/10"
                     >
                         <input
-                            wire:model="initial_value"
+                            wire:model.blur="asset.initial_value"
                             wire:loading.attr="disabled"
                             aria-label="Asset value"
                             class="@error('initial_value') outline-red-300 @enderror relative block w-full appearance-none rounded-lg px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-500 dark:data-invalid:data-hover:border-red-500 data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/[2.5%] dark:data-hover:data-disabled:border-white/15 dark:[color-scheme:dark]"
                             type="text"
                             placeholder="eg. 1000"
                             name="initial_value"
-                            required
                         />
-                        @error('intial_value')
+                        @error('initial_value')
                             <p class="position: absolute mt-2 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500">{{ $message }}</p>
                         @enderror
                     </span>
@@ -94,14 +93,13 @@
                         class="relative block w-full before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500 has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none has-data-invalid:before:shadow-red-500/10"
                     >
                         <input
-                            wire:model="target_funding"
+                            wire:model.blur="asset.target_funding"
                             wire:loading.attr="disabled"
                             aria-label="Target Funding"
                             class="@error('target_funding') outline-red-300 @enderror relative block w-full appearance-none rounded-lg px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-500 dark:data-invalid:data-hover:border-red-500 data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/[2.5%] dark:data-hover:data-disabled:border-white/15 dark:[color-scheme:dark]"
                             type="text"
                             placeholder="eg. 1200"
                             name="target_funding"
-                            required
                         />
                         @error('target_funding')
                             <p class="position: absolute mt-2 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500">{{ $message }}</p>
@@ -121,14 +119,14 @@
                         class="relative block w-full before:absolute before:inset-px before:rounded-lg before:bg-white before:shadow-sm dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset has-data-focus:after:ring-2 has-data-focus:after:ring-blue-500 has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none"
                     >
                         <select
-                            wire:model="currency"
+                            wire:model.live="asset.currency"
                             wire:loading.attr="disabled"
                             aria-label="Currency"
                             name="currency"
-                            required
-                            class="@error('target_funding') outline-red-300 @enderror relative block w-full appearance-none rounded-lg py-2.5 sm:py-1.5 pr-10 pl-3.5 sm:pr-9 sm:pl-3 text-base text-zinc-950 placeholder:text-zinc-500 sm:text-sm dark:text-white dark:bg-zinc-800 border border-zinc-950/10 hover:border-zinc-950/20 dark:border-white/10 dark:hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none invalid:border-red-500 invalid:hover:border-red-500 dark:invalid:border-red-600 dark:invalid:hover:border-red-600 disabled:border-zinc-950/20 disabled:opacity-100 dark:disabled:border-white/15 dark:disabled:bg-white/[2.5%] dark:hover:disabled:border-white/15"
+                            class="@error('currency') outline-red-300 @enderror relative block w-full appearance-none rounded-lg py-2.5 sm:py-1.5 pr-10 pl-3.5 sm:pr-9 sm:pl-3 text-base text-zinc-950 placeholder:text-zinc-500 sm:text-sm dark:text-white dark:bg-zinc-800 border border-zinc-950/10 hover:border-zinc-950/20 dark:border-white/10 dark:hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none invalid:border-red-500 invalid:hover:border-red-500 dark:invalid:border-red-600 dark:invalid:hover:border-red-600 disabled:border-zinc-950/20 disabled:opacity-100 dark:disabled:border-white/15 dark:disabled:bg-white/[2.5%] dark:hover:disabled:border-white/15"
                         >
-                            <option value="usd" selected>USD - United States Dollar</option>
+                            <option selected value="">Select bellow</option>
+                            <option value="usd">USD - United States Dollar</option>
                         </select>
                         <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <svg class="w-5 h-5 stroke-zinc-500 group-disabled:stroke-zinc-600 sm:w-4 sm:h-4 dark:stroke-zinc-400" viewBox="0 0 16 16" aria-hidden="true" fill="none">
@@ -144,6 +142,9 @@
             </section>
             <hr role="presentation" class="my-10 w-full border-t border-zinc-950/5 dark:border-white/5" />
             <div class="flex justify-end gap-4">
+                @if (session('status'))
+                    <span class="inline-flex items-center ml-2 gap-x-1.5 rounded-md px-2.5 py-0.5 text-sm font-medium bg-lime-400/20 text-lime-700 dark:bg-lime-400/10 dark:text-lime-300">Created Successfully</span>
+                @endif
                 <button
                     type="reset"
                     class="relative inline-flex items-center justify-center gap-x-2 rounded-lg border text-base font-semibold px-4 py-2 sm:px-3 sm:py-1.5 sm:text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 border-transparent text-zinc-950 hover:bg-zinc-950/5 dark:text-white dark:hover:bg-white/10 cursor-default"

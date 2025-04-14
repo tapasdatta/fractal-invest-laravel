@@ -4,6 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>{{ $title ?? 'Page Title' }}</title>
+      <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon" sizes="32x32"/>
       <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       @livewireStyles
       @vite(['resources/css/app.css', 'resources/js/app.js'])

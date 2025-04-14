@@ -4,7 +4,8 @@
             <div class="flex items-start">
                 <svg fill="currentColor" viewBox="0 0 113 22" class="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.99906 0.5L6.57031 0.742752L0.570312 10.7428V11.2572L6.57031 21.2572L6.99906 21.5H18.9991L19.3526 20.6464L16.8526 18.1464L16.4991 18H9.27424L4.8409 11L9.27424 4H16.4991L16.8526 3.85355L19.3526 1.35355L18.9991 0.5H6.99906Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M20.7927 4.21875L18.3657 6.64575L18.2969 7.2668L20.6605 10.9993L18.2969 14.7318L18.3657 15.3529L20.7927 17.7799L21.5751 17.6835L25.4311 11.2565V10.7421L21.5751 4.31507L20.7927 4.21875Z"></path></svg>
             </div>
-            <h1 class="text-2xl/8 mt-3 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Sign in to your account</h1>            <p class="mt-1 text-sm/5 text-gray-600">
+            <h1 class="text-2xl/8 mt-3 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Sign in to your account</h1>
+            <p class="mt-1 text-sm/5 text-zinc-400">
                 Enter your email — we’ll send you a code to log in.
             </p>
             @error('login')
@@ -53,7 +54,7 @@
         </form>
     @else
         <form class="p-7 sm:p-11" wire:submit="verify_otp">
-            <p class="mt-1 text-sm/5 text-gray-600">
+            <p class="mt-1 text-sm/5 text-zinc-400">
                 You have sent an email with a code to log in.
             </p>
             <div class="mt-4 space-y-3">
@@ -97,7 +98,7 @@
                 </button>
             </div>
             @env('local')
-                <p class="mt-5 text-sm text-white">Email not configured yet? Open <a href="{{ route('browseremail', ['email' => $email, 'otp' => $otp]) }}" target="_blank" class="text-indigo-600 underline">browser email</a> for the OTP verification.</p>
+                <p class="mt-6 text-sm text-zinc-400">Email not configured yet? Open <a href="{{ route('browseremail', ['email' => $email, 'otp' => $otp]) }}" target="_blank" class="text-white underline">browser email</a> for the OTP verification.</p>
             @endenv
         </form>
     @endif

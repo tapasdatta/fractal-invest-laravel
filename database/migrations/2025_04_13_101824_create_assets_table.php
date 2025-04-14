@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\AssetStatus;
+use App\Enums\Currency;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,12 +18,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title', 255);
             $table->text('description')->nullable();
-            $table->enum('currency', ['usd'])->default('usd');
+            $table->enum('currency', Currency::values())->default(Currency::USD);
             $table->decimal('initial_value', 15, 2);
             $table->decimal('current_value', 15, 2)->default(0.00);
             $table->decimal('target_funding', 15, 2);
             $table->decimal('current_funding', 15, 2)->default(0.00);
-            $table->enum('status', ['proposed', 'voting', 'funding', 'active', 'matured'])->default('proposed');
+            $table->enum('status', AssetStatus::values())->default(AssetStatus::PROPOSED);
             $table->integer('vote_count')->default(0);
             $table->timestamp('funding_deadline')->nullable();
             $table->timestamp('maturity_date')->nullable();

@@ -1,13 +1,12 @@
 <?php
 
 use App\Livewire\Auth;
-use App\Livewire\CreateAsset;
+use App\Livewire\Assets\CreateAsset;
 use App\Livewire\Dashboard;
-use App\Livewire\Otp;
+use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\OtpCreated;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth as AuthFacade;
 use Illuminate\Support\Facades\Hash;
 
 Route::middleware(['guest', 'throttle:50,1'])->group(function() {
@@ -16,7 +15,7 @@ Route::middleware(['guest', 'throttle:50,1'])->group(function() {
 
 Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
     Route::get("/", Dashboard::class)->name('dashboard');
-    Route::get("/assets/create", CreateAsset::class)->name('create-asset');
+    Route::get("/assets/create", CreateAsset::class)->name('assets.create');
 });
 
 
@@ -32,3 +31,8 @@ Route::get('browseremail/{email}/{otp}', function ($email, $otp) {
     }
     return abort(404);
 })->name('browseremail');
+
+
+Route::get('assets', function() {
+    return Asset::all();
+});

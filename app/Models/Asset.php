@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AssetStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class Asset extends Model
@@ -14,8 +15,9 @@ class Asset extends Model
     protected $fillable = [
         'title',
         'description',
-        'intial_value',
+        'initial_value',
         'target_funding',
+        'currency'
     ];
 
     /**
@@ -28,6 +30,11 @@ class Asset extends Model
         return [
             'funding_deadline' => 'datetime',
             'maturity_date' => 'datetime',
+            'status' => AssetStatus::class,
+            'initial_value' => 'decimal:2',
+            'target_funding' => 'decimal:2',
+            'current_value' => 'decimal:2',
+            'current_funding' => 'decimal:2',
         ];
     }
 
