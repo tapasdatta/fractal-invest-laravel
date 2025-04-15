@@ -12,9 +12,11 @@ class CreateAsset extends Component
 
     public function save()
     {
-        $this->asset->create();
+        $asset = $this->asset->create();
 
         session()->flash('status', 'Asset successfully created.');
+
+        $this->dispatch('asset-created', asset: $asset->id);
 
         $this->redirect(route('assets.create'), navigate: true);
     }

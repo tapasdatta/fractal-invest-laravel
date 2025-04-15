@@ -39,9 +39,10 @@ class AssetForm extends Form
 
         $user = Auth()->user();
 
-        $user->assets()->create($validated);
+        $asset = $user->assets()->create($validated);
 
-        //reset the form properties
         $this->reset();
+
+        return $asset;
     }
 }

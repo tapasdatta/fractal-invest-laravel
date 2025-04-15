@@ -99,10 +99,10 @@
                                     </div>
                                 </td>
                                 <td class="relative px-4 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2)) border-b border-zinc-950/5 dark:border-white/5 py-4 sm:first:pl-1 sm:last:pr-1">
-                                   US${{ $asset->initial_value }}
+                                    US${{ $asset->initial_value }}
                                 </td>
                                 <td class="relative px-4 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2)) border-b border-zinc-950/5 dark:border-white/5 py-4 sm:first:pl-1 sm:last:pr-1">
-                                   US${{ $asset->target_funding }}
+                                    US${{ $asset->target_funding }}
                                 </td>
                                 <td class="relative px-4 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2)) border-b border-zinc-950/5 dark:border-white/5 py-4 sm:first:pl-1 sm:last:pr-1">
                                     --
