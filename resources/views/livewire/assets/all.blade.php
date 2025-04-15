@@ -62,7 +62,9 @@
         </div>
       </div>
     </div>
-    <h2 class="mt-14 text-base/7 font-semibold text-zinc-950 sm:text-sm/6 dark:text-white"> Recent Assets </h2>
+    <h2 class="mt-14 text-base/7 font-semibold text-zinc-950 sm:text-sm/6 dark:text-white">
+        Recent Assets
+    </h2>
 
     @if($assets)
         <div class="flow-root">

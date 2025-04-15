@@ -12,13 +12,11 @@ class CreateAsset extends Component
 
     public function save()
     {
-        $asset = $this->asset->create();
+        $this->asset->create();
+
+        $this->reset();
 
         session()->flash('status', 'Asset successfully created.');
-
-        $this->dispatch('asset-created', asset: $asset->id);
-
-        $this->redirect(route('assets.create'), navigate: true);
     }
 
     #[Title("Create your asset!")]
@@ -26,6 +24,4 @@ class CreateAsset extends Component
     {
         return view('livewire.assets.create');
     }
-
-
 }
