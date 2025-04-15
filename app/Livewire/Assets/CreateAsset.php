@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Assets;
 
+use App\Events\AssetCreated;
 use App\Livewire\Forms\AssetForm;
 use Livewire\Component;
 use Livewire\Attributes\Title;
@@ -12,7 +13,9 @@ class CreateAsset extends Component
 
     public function save()
     {
-        $this->asset->create();
+        $asset = $this->asset->create();
+
+        AssetCreated::dispatch($asset);
 
         $this->reset();
 
