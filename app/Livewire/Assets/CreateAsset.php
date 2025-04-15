@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Assets;
 
+use App\Events\AssetCreated;
 use App\Livewire\Forms\AssetForm;
 use Livewire\Component;
 use Livewire\Attributes\Title;
@@ -14,11 +15,11 @@ class CreateAsset extends Component
     {
         $asset = $this->asset->create();
 
+        AssetCreated::dispatch($asset);
+
+        $this->reset();
+
         session()->flash('status', 'Asset successfully created.');
-
-        $this->dispatch('asset-created', asset: $asset->id);
-
-        $this->redirect(route('assets.create'), navigate: true);
     }
 
     #[Title("Create your asset!")]
@@ -26,6 +27,4 @@ class CreateAsset extends Component
     {
         return view('livewire.assets.create');
     }
-
-
 }

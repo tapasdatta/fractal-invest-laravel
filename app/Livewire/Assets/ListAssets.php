@@ -9,27 +9,30 @@ use Livewire\Component;
 
 class ListAssets extends Component
 {
+    public $showNewAssetNotification = false;
 
     public $assets;
 
-    public function mount()
+    #[On('echo-private:assets,.asset.created')]
+    public function notifyNewAsset($event)
     {
-        $this->assets = Asset::with('user:id,email')->get();
+        if($event['id']) {
+            $asset = Asset::with('user:id,email')->whereId($event['id'])->first();
+
+            $this->assets->prepend($asset);
+
+            $this->showNewAssetNotification = true;
+        }
     }
 
-    #[On('asset-created')]
-    public function assetCreated(Asset $asset)
+    public function mount()
     {
-        $this->assets->prepend($asset);
-
-        session()->flash('status', 'Asset successfully created.');
+        $this->assets = Asset::with('user:id,email')->latest()->get();
     }
 
     #[Title("All Assets")]
     public function render()
     {
-        return view('livewire.assets.all')->with([
-            'assets' => Asset::with('user:id,email')->get()
-        ]);
+        return view('livewire.assets.all');
     }
 }

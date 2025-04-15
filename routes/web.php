@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\AssetCreated;
 use App\Livewire\Auth;
 use App\Livewire\Assets\CreateAsset;
 use App\Livewire\Assets\ListAssets;
@@ -33,6 +34,20 @@ Route::get('browseremail/{email}/{otp}', function ($email, $otp) {
     }
     return abort(404);
 })->name('browseremail');
+
+
+Route::get('event', function() {
+    $asset = Asset::first();
+
+    // return Asset::find(1);
+    // return $asset;
+
+   AssetCreated::dispatch($asset);
+});
+
+// Route::post('broadcasting/auth', function () {
+//     return Auth::user();
+// });
 
 
 // Route::get('assets', function() {

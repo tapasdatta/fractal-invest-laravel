@@ -62,7 +62,20 @@
         </div>
       </div>
     </div>
-    <h2 class="mt-14 text-base/7 font-semibold text-zinc-950 sm:text-sm/6 dark:text-white"> Recent Assets </h2>
+    <h2 class="mt-14 text-base/7 font-semibold text-zinc-950 sm:text-sm/6 dark:text-white">
+        Recent Assets
+        @if($showNewAssetNotification)
+            <span
+                x-data="{ show: true }"
+                x-init="setTimeout(() => show = false, 3000)"
+                x-show="show"
+                x-transition.opacity.duration.1000ms
+                class="inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-sm/5 font-medium sm:text-xs/5 forced-colors:outline bg-lime-400/20 text-lime-700 group-data-hover:bg-lime-400/30 dark:bg-lime-400/10 dark:text-lime-300"
+            >
+                new asset published now!
+            </span>
+        @endif
+    </h2>
 
     @if($assets)
         <div class="flow-root">
