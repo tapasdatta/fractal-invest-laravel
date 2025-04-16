@@ -17,6 +17,11 @@ class CreateAsset extends Component
 
         AssetCreated::dispatch($asset);
 
+        //after asset creation, it will go for admin approval.
+        //admin will aprove or reject the asset.
+        //the user will get notification about the approval or rejection.
+        //broadcast the event to users(frontend)
+
         $this->reset();
 
         session()->flash('status', 'Asset successfully created.');

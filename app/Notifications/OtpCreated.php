@@ -12,15 +12,13 @@ class OtpCreated extends Notification
 {
     use Queueable;
 
-    private $user;
     private $otp;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($user, $otp)
+    public function __construct($otp)
     {
-        $this->user = $user;
         $this->otp = $otp;
     }
 
@@ -43,7 +41,7 @@ class OtpCreated extends Notification
             ->subject('OTP Created')
             ->line('Please use the following OTP to proceed: ')
             ->line($this->otp)
-            ->line('The otp expires in at: ' . $this->user->otp_expired_at->format('H:i:s'));
+            ->line('The otp expires in at: ' . $notifiable->otp_expired_at->format('H:i:s'));
     }
 
     /**

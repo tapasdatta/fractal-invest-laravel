@@ -72,6 +72,8 @@ return [
             'after_commit' => false,
         ],
 
+        //rabbitMQ
+
     ],
 
     /*

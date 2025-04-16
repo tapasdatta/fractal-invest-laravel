@@ -1,5 +1,4 @@
-<div class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
-  <div class="mx-auto max-w-6xl">
+<div>
     <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">
       <div x-data="greeting()">
         <h1 x-text="message"></h1>
@@ -132,4 +131,3 @@
         </div>
     @endif
   </div>
-</div>

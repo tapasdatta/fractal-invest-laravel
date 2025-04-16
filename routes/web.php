@@ -1,13 +1,20 @@
 <?php
 
 use App\Events\AssetCreated;
+use App\Jobs\Assets\BroadcastAsset;
+use App\Jobs\Assets\NotifyUser;
+use App\Jobs\Assets\StatusUpdated;
 use App\Livewire\Auth;
 use App\Livewire\Assets\CreateAsset;
 use App\Livewire\Assets\Assets;
+use App\Livewire\Assets\Show;
 use App\Livewire\Dashboard;
 use App\Models\Asset;
 use App\Models\User;
+use App\Notifications\AssetStatusUpdated;
 use App\Notifications\OtpCreated;
+use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,8 +24,10 @@ Route::middleware(['guest', 'throttle:50,1'])->group(function() {
 
 Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
     Route::get("/", Dashboard::class)->name('dashboard');
+
     Route::get("/assets/create", CreateAsset::class)->name('assets.create');
-    Route::get("/assets", Assets::class)->name('assets.list');
+    Route::get("/assets/{asset}", Show::class)->name('assets.show');
+    Route::get("/assets", Assets::class)->name('assets.all');
 });
 
 
@@ -34,6 +43,28 @@ Route::get('browseremail/{email}/{otp}', function ($email, $otp) {
     }
     return abort(404);
 })->name('browseremail');
+
+Route::get('notify', function () {
+
+    $user = User::first();
+
+    $asset = Asset::first();
+
+    return (new AssetStatusUpdated($asset))->toMail($user);
+});
+
+
+Route::get('job', function() {
+    $asset = Asset::with('user')->first();
+
+    $batch = Bus::batch([
+        new StatusUpdated(),
+        new BroadcastAsset(),
+        new NotifyUser($asset)
+    ])->dispatch();
+
+    return $batch->id;
+});
 
 
 Route::get('event', function() {

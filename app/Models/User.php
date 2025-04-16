@@ -103,7 +103,7 @@ class User extends Authenticatable
             ]
         );
 
-        $user->notify(new OtpCreated($user, $otp));
+        $user->notify(new OtpCreated($otp));
 
         return $otp;
     }
