@@ -77,7 +77,7 @@
         @endif
     </h2>
 
-    @if($assets)
+    @if($this->assets)
         <div class="flow-root">
             <div class="mt-4 [--gutter:--spacing(6)] lg:[--gutter:--spacing(10)] -mx-(--gutter) overflow-x-auto whitespace-nowrap">
                 <div class="inline-block min-w-full align-middle sm:px-(--gutter)">
@@ -94,7 +94,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($assets as $asset)
+                        @foreach ($this->assets as $asset)
                             <tr wire:key="{{ $asset->id }}" class="has-[[data-row-link][data-focus]]:outline-2 has-[[data-row-link][data-focus]]:-outline-offset-2 has-[[data-row-link][data-focus]]:outline-blue-500 dark:focus-within:bg-white/[2.5%] hover:bg-zinc-950/[2.5%] dark:hover:bg-white/[2.5%]">
                                 <td class="relative px-4 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2)) border-b border-zinc-950/5 dark:border-white/5 py-4 sm:first:pl-1 sm:last:pr-1">
                                     {{ $asset->title }}
