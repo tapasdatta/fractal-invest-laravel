@@ -8,18 +8,16 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
-class AssetStatusUpdated extends Notification
+class AssetApproved extends Notification
 {
     use Queueable;
-
-    private $asset;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($asset)
+    public function __construct()
     {
-        $this->asset = $asset;
+        //
     }
 
     /**
@@ -37,7 +35,7 @@ class AssetStatusUpdated extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = route('assets.show', ['asset' => $this->asset->id]);
+        $url = route('assets.show', ['asset' => $notifiable->asset_id]);
 
         return (new MailMessage)
             ->greeting('Hello!')
