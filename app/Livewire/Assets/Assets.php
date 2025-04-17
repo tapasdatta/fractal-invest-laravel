@@ -18,13 +18,13 @@ class Assets extends Component
         return Asset::with('user:id,email')->latest()->get();
     }
 
-    #[On('echo-private:assets,.asset.created')]
+    #[On('echo-private:assets,.assets.published')]
     public function notifyNewAsset($event)
     {
-        if($event['id']) {
-            $asset = Asset::with('user:id,email')->whereId($event['id'])->first();
+        if($event['assetIds']) {
+            $assets = Asset::with('user:id,email')->whereIn('id', $event['assetIds'])->get();
 
-            $this->assets->prepend($asset);
+            $this->assets->merge($assets);
 
             $this->showNewAssetNotification = true;
         }
