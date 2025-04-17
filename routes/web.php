@@ -18,16 +18,15 @@ Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
 
 
 //Mocking: Email OTP Preview
-if (config('app.env') != 'local') {
-    Route::get('browseremail/{email}/{otp}', function ($email, $otp) {
 
-        $user = App\Models\User::where('email', $email)->first();
+Route::get('browseremail/{email}/{otp}', function ($email, $otp) {
 
-        if ($user && Illuminate\Support\Facades\Hash::check($otp, $user->otp) && $user->otp_expired_at >= now()) {
+    $user = App\Models\User::where('email', $email)->first();
 
-            return (new App\Notifications\OtpCreated($user, $otp))
-                ->toMail($user);
-        }
-        return abort(404);
-    })->name('browseremail');
-}
+    if ($user && Illuminate\Support\Facades\Hash::check($otp, $user->otp) && $user->otp_expired_at >= now()) {
+
+        return (new App\Notifications\OtpCreated($user, $otp))
+            ->toMail($user);
+    }
+    return abort(404);
+})->name('browseremail');
