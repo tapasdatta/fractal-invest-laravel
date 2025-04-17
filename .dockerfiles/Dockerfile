@@ -4,39 +4,60 @@ FROM php:8.4-fpm
 ARG user
 ARG uid
 
-# Install system dependencies
-RUN apt update && apt install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
-
-RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
-RUN apt install -y nodejs
-# RUN apt install -y npm
-
-RUN apt install -y \
-    autoconf \
-    zlib1g-dev
-
-# Clear cache
-RUN apt clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-
 # Set working directory
 WORKDIR /var/www
 
-USER $user
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl \
+    libzip-dev \
+    cron \
+    iputils-ping \
+    libxml2-dev \
+    autoconf \
+    zlib1g-dev
+
+# Install latest Node.js and npm
+RUN curl -sL https://deb.nodesource.com/setup_current.x | bash - && \
+    apt-get install -y nodejs
+
+# Clear apt cache
+RUN apt clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql gd zip exif pcntl bcmath
+
+# Install Composer globally
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copy the cronjob definition file from the host to the container
+# COPY cronjob /etc/cron.d/laravel-cron
+
+# Copy the cronjob definition file to the container (cronjob file will be inside /etc/cron.d/)
+RUN echo "* * * * * www-data php /var/www/artisan schedule:run >> /var/log/cron.log 2>&1" > /etc/cron.d/laravel-cron
+
+# Set correct permissions and create log file for cron
+RUN chmod 0644 /etc/cron.d/laravel-cron && \
+    touch /var/log/cron.log && \
+    chown -f www-data:www-data /var/log/cron.log
+
+# Create application user
+RUN useradd -G www-data,root -u $uid -d /home/$user $user && \
+    mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Start both cron and php-fpm
+CMD service cron start && php-fpm
+
+# Expose PHP-FPM port
+EXPOSE 9000
