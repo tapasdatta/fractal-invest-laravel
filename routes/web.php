@@ -1,9 +1,5 @@
 <?php
 
-use App\Events\AssetCreated;
-use App\Jobs\Assets\BroadcastAsset;
-use App\Jobs\Assets\NotifyUser;
-use App\Jobs\Assets\StatusUpdated;
 use App\Livewire\Auth;
 use App\Livewire\Assets\CreateAsset;
 use App\Livewire\Assets\Assets;
@@ -13,8 +9,6 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\AssetStatusUpdated;
 use App\Notifications\OtpCreated;
-use Illuminate\Support\Facades\Broadcast;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 
@@ -52,35 +46,3 @@ Route::get('notify', function () {
 
     return (new AssetStatusUpdated($asset))->toMail($user);
 });
-
-
-Route::get('job', function() {
-    $asset = Asset::with('user')->first();
-
-    $batch = Bus::batch([
-        new StatusUpdated(),
-        new BroadcastAsset(),
-        new NotifyUser($asset)
-    ])->dispatch();
-
-    return $batch->id;
-});
-
-
-Route::get('event', function() {
-    $asset = Asset::first();
-
-    // return Asset::find(1);
-    // return $asset;
-
-   AssetCreated::dispatch($asset);
-});
-
-// Route::post('broadcasting/auth', function () {
-//     return Auth::user();
-// });
-
-
-// Route::get('assets', function() {
-//     return Asset::all();
-// });
