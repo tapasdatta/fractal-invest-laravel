@@ -1,6 +1,7 @@
 <?php
 
 use App\Console\Commands\BroadcastNewAssets;
+use App\Console\Commands\SendAssetApprovedNotification;
 use Illuminate\Foundation\Application;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -27,6 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withSchedule(function (Schedule $schedule) {
         // Schedule the command to run every minute
         $schedule->command(BroadcastNewAssets::class)->everyMinute()->withoutOverlapping();
+        $schedule->command(SendAssetApprovedNotification::class)->everyMinute()->withoutOverlapping();
     })
     ->withCommands([
         BroadcastNewAssets::class,

@@ -5,9 +5,7 @@ use App\Livewire\Assets\CreateAsset;
 use App\Livewire\Assets\Assets;
 use App\Livewire\Assets\Show;
 use App\Livewire\Dashboard;
-use App\Models\Asset;
 use App\Models\User;
-use App\Notifications\AssetStatusUpdated;
 use App\Notifications\OtpCreated;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
@@ -37,12 +35,3 @@ Route::get('browseremail/{email}/{otp}', function ($email, $otp) {
     }
     return abort(404);
 })->name('browseremail');
-
-Route::get('notify', function () {
-
-    $user = User::first();
-
-    $asset = Asset::first();
-
-    return (new AssetStatusUpdated($asset))->toMail($user);
-});

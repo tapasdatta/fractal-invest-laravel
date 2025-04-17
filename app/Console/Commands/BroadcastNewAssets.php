@@ -34,7 +34,6 @@ class BroadcastNewAssets extends Command
         $newAssetsIds = Asset::select(['id'])->where('created_at', '>', $lastBroadcastedAt)->pluck('id');
 
         if ($newAssetsIds->isNotEmpty()) {
-
             // Broadcast the new assets
             broadcast(new NewAssetsBroadcast($newAssetsIds));
 
