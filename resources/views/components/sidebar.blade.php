@@ -114,7 +114,7 @@
                         </span>
                         <span class="min-w-0">
                             <span class="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{{ Auth::user()->email }}</span>
-                            <livewire:logout />
+                            <livewire:users.logout />
                         </span>
                     </span>
                 </div>
