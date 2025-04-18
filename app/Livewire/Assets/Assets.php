@@ -7,9 +7,12 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Assets extends Component
 {
+    use WithPagination;
+
     public $showNewAssetNotification = false;
 
     #[Computed]
@@ -33,6 +36,6 @@ class Assets extends Component
     #[Title("All Assets")]
     public function render()
     {
-        return view('livewire.assets.all');
+        return view('livewire.assets.assets');
     }
 }

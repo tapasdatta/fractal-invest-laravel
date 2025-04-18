@@ -13,7 +13,6 @@ Route::group(['middleware' => ['auth', 'throttle:50,1']], function() {
 
     Route::get("/assets/create", Create::class)->name('assets.create');
     Route::get("/assets/{asset}", Show::class)->name('assets.show');
-    Route::get("/assets", Assets::class)->name('assets.all');
 });
 
 
