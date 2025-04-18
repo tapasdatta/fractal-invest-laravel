@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     autoconf \
     zlib1g-dev
 
+
 # Install latest Node.js and npm
 RUN curl -sL https://deb.nodesource.com/setup_current.x | bash - && \
     apt-get install -y nodejs
@@ -44,7 +45,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # COPY cronjob /etc/cron.d/laravel-cron
 
 # Copy the cronjob definition file to the container (cronjob file will be inside /etc/cron.d/)
-RUN echo "* * * * * www-data php /var/www/artisan schedule:run >> /var/log/cron.log 2>&1" > /etc/cron.d/laravel-cron
+RUN echo "* * * * * www-data /usr/local/bin/php /var/www/artisan schedule:run >> /var/log/cron.log 2>&1" > /etc/cron.d/laravel-cron
 
 # Set correct permissions and create log file for cron
 RUN chmod 0644 /etc/cron.d/laravel-cron && \
@@ -57,7 +58,7 @@ RUN useradd -G www-data,root -u $uid -d /home/$user $user && \
     chown -R $user:$user /home/$user
 
 # Start both cron and php-fpm
-CMD service cron start && php-fpm
+CMD ["sh", "-c", "service cron start && tail -f /var/log/cron.log"]
 
 # Expose PHP-FPM port
 EXPOSE 9000
