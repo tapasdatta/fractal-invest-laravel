@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth as AuthFacade;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 
 class Auth extends Component
@@ -15,6 +16,10 @@ class Auth extends Component
     public $login_form = true;
     public $email;
     public $otp;
+
+    // Mock OTP for local environment
+    #[Locked]
+    public $email_otp;
 
     /**
     * Render the component view.
@@ -46,7 +51,7 @@ class Auth extends Component
 
         if(env('APP_ENV') == 'local')
         {
-            $this->otp = $otp;
+            $this->email_otp = $otp;
         }
 
         $this->login_form = false;

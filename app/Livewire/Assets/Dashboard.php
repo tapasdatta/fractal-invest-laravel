@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Assets;
 
 use Livewire\Component;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Component

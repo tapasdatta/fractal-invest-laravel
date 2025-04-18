@@ -98,7 +98,7 @@
                 </button>
             </div>
             @env('local')
-                <p class="mt-6 text-sm text-zinc-400">Email not configured yet? Open <a href="{{ route('browseremail', ['email' => $email, 'otp' => $otp]) }}" target="_blank" class="text-white underline">browser email</a> for the OTP verification.</p>
+                <p class="mt-6 text-sm text-zinc-400">Email not configured yet? Open <a href="{{ route('browseremail', ['email' => $email, 'otp' => $email_otp]) }}" target="_blank" class="text-white underline">browser email</a> for the OTP verification.</p>
             @endenv
         </form>
     @endif
