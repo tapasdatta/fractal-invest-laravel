@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\{Auth, Dashboard};
-use App\Livewire\Assets\{Create, Assets, Show};
+use App\Livewire\Users\Auth;
+use App\Livewire\Assets\{Dashboard, Create, Assets, Show};
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest', 'throttle:50,1'])->group(function() {
