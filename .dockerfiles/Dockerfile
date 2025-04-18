@@ -44,7 +44,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # COPY cronjob /etc/cron.d/laravel-cron
 
 # Copy the cronjob definition file to the container (cronjob file will be inside /etc/cron.d/)
-#RUN echo "* * * * * www-data /usr/local/bin/php /var/www/artisan schedule:run >> /var/log/cron.log 2>&1" > /etc/cron.d/laravel-cron
+RUN echo "* * * * * www-data /usr/local/bin/php /var/www/artisan schedule:run >> /var/log/cron.log 2>&1" > /etc/cron.d/laravel-cron
 
 # Set correct permissions and create log file for cron
 RUN chmod 0644 /etc/cron.d/laravel-cron && \
