@@ -3,6 +3,8 @@ name: fractal_invest
 services:
   app:
     container_name: "fractal_invest_app"
+    ports:
+      - "5173:5173"
     build:
       args:
         user: fractal_invest
@@ -45,20 +47,51 @@ services:
     environment:
       - TZ=Asia/Dhaka
 
+  cron:
+    container_name: fractal_invest_cron
+    build:
+      args:
+        user: fractal_invest
+        uid: 1000
+      context: ./.dockerfiles
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www
+    networks:
+      - fractal_invest
+    environment:
+      SERVICE_NAME: fractal_invest
+      SERVICE_TAGS: dev
+      DB_CONNECTION:
+      DB_HOST: ${DB_HOST:-localhost}
+      DB_PORT: ${DB_PORT:-3306}:3306
+      DB_DATABASE: ${DB_DATABASE:-fractal_invest}
+      DB_USERNAME: ${DB_USERNAME:-fractal_invest}
+      DB_PASSWORD: ${DB_PASSWORD:-fractal_invest}
+
   db:
     image: mysql:8.4
     container_name: fractal_invest_db
     restart: always
+    volumes:
+      - ./.dockerfiles/dbdata:/var/lib/mysql
+      - ./.dockerfiles/my.cnf:/etc/mysql/my.cnf
     ports:
-      - "3306:3306"
+      - "${DB_PORT:-3306}:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fractal_db
-      MYSQL_USER: fractal_user
-      MYSQL_PASSWORD: fractal_password
+      MYSQL_DATABASE: ${DB_DATABASE:-fractal_invest}
+      MYSQL_USER: ${DB_USERNAME:-fractal_invest}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-fractal_invest}
     networks:
       - fractal_invest
 
 networks:
   fractal_invest:
     driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
