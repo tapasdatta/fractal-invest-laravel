@@ -13,13 +13,10 @@ class Create extends Component
 
     public function save()
     {
-        // Validate the data and create the asset
         $this->asset->create();
 
-        // Reset the form
         $this->reset();
 
-        // Flash the session with a success message
         session()->flash('status', 'Asset successfully created.');
     }
 }
